@@ -82,8 +82,7 @@
         <div class="buttonmenu" onmouseenter='document.getElementById("tooltip").style.display = "block"; document.getElementById("tooltip").textContent = "..."' onmouseleave='document.getElementById("tooltip").style.display = "none"'>
             <button class="menubutton" onclick="themeTab()" onmouseenter='document.getElementById("tooltip").textContent = "Theme"' onmouseleave='document.getElementById("tooltip").textContent = "..."'>palette</button>
             <button class="menubutton" onclick="statisticsTab()" onmouseenter='document.getElementById("tooltip").textContent = "Statistics"' onmouseleave='document.getElementById("tooltip").textContent = "..."'>bar_chart</button>
-            <button class="menubutton" onclick="aiTab()" onmouseenter='document.getElementById("tooltip").textContent = "AI"' onmouseleave='document.getElementById("tooltip").textContent = "..."'>robot</button>
-            <button class="menubutton" onclick="startAuth()" onmouseenter='document.getElementById("tooltip").textContent = "KRZS Account"' onmouseleave='document.getElementById("tooltip").textContent = "..."'><img width="50%" height="50%" src="https://auth.krzs.xyz/assets/logo.svg" /></button>
+            <button class="menubutton" onclick="startAuth()" onmouseenter='document.getElementById("tooltip").textContent = "KRZS Account"' onmouseleave='document.getElementById("tooltip").textContent = "..."'><img width="50%" height="50%" src="https://krzs.xyz/logo.svg" /></button>
         </div>
         <div class="tooltip" id="tooltip"><span>...</span></div>
         <div class="content">
@@ -160,23 +159,6 @@
                 </div>
             </div>
         </div>
-        <div class="ai menu">
-            <div class="head">
-                <h1 class="menumain"><div class="menumainicon">robot</div>AI</h1>
-                <button class="minibutton aibtn" onclick="suggestTasks()"><div class="loader">sync</div> Brainstorm Task Ideas</button>
-                <button class="menubutton closebutton" onclick="closeAiTab()">clear</button>
-                <hr class="menudivider">
-            </div>
-            <div class="chatui">
-                <div class="glasschatbox" id="chatbox">
-                    <span class="message"><b>AI: </b>Hi, I'm Blueberry AI! How can I help you?</span>
-                </div>
-                <form class="inputfield" onsubmit="event.preventDefault(); sendAiMessage(); return false">
-                    <input class="glassinput aichat" type="text" id="aiinput" placeholder="Type to chat..." required autocomplete="off" />
-                    <input class="submitbtn" type="submit" id="aisubmitbtn" value="send" />
-                </form>
-            </div>
-        </div>
         <div class="modaloverlay">
             <div class="taskmodal modal">
                 <form id="newtaskform" class="modalform">
@@ -222,5 +204,5 @@
         </div>
     </body>
     <script src="https://auth.krzs.xyz/api.js?,10"></script>
-    <script class="krzs" id="/assets/script/script.js?6.6.2"></script>
+    <script class="krzs" id="/assets/script/script.js?6.fur"></script>
 </html>

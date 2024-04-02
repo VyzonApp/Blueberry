@@ -180,15 +180,17 @@ function createTask(txt, priority, storetask, id, desc, duedate) {
     ptext.onclick = function () {
         editTask()
     }
-    ptext.textContent = txt;
+    ptext.textContent = furrySpeak(txt);
+    var furdance = document.createElement("img");
+    furdance.src = "/furdance.gif";
+    furdance.classList.add("furdance");
+    ptext.appendChild(furdance);
     if (priority == "75") {
         ptext.classList.add("normalpriority");
     } else if (priority == "100") {
         ptext.classList.add("highpriority");
     } else if (priority == "50") {
         ptext.classList.add("lowpriority");
-    } else if (priority == "25") {
-        ptext.classList.add("aipriority");
     } else {
         ptext.classList.add("debugpriority");
     };
@@ -298,24 +300,6 @@ function closeStatisticsTab() {
     setTimeout(function(){if(document.documentElement.scrollWidth > 950){document.querySelector(".statistics").style.right = "-50%"}else{document.querySelector(".statistics").style.right = "-100%"}},100);
     setTimeout(function(){document.querySelector(".statistics").style.position = "absolute";document.querySelector(".statistics").style.display = "none";EvTarget.disabled = false;},1100);
 };
-function aiTab() {
-    playSound("/assets/sfx/openmenu.mp3");
-    EvTarget = event.target
-    EvTarget.disabled = true;
-    document.querySelector(".ai").style.position = "fixed";
-    if(document.documentElement.scrollWidth > 950){document.querySelector(".ai").style.right = "-50%";}else{document.querySelector(".ai").style.right = "-100%";};
-    document.querySelector(".ai").style.display = "flex";
-    setTimeout(function(){document.querySelector(".ai").style.right = "0"},100);
-    setTimeout(function(){document.querySelector(".ai").style.position = "absolute";EvTarget.disabled = false;},1100);
-};
-function closeAiTab() {
-    playSound("/assets/sfx/closemenu.mp3");
-    EvTarget = event.target;
-    EvTarget.disabled = true;
-    document.querySelector(".ai").style.position = "fixed";
-    setTimeout(function(){if(document.documentElement.scrollWidth > 950){document.querySelector(".ai").style.right = "-50%"}else{document.querySelector(".ai").style.right = "-100%"}},100);
-    setTimeout(function(){document.querySelector(".ai").style.position = "absolute";document.querySelector(".ai").style.display = "none";EvTarget.disabled = false;},1100);
-};
 function themeTab() {
     playSound("/assets/sfx/openmenu.mp3");
     EvTarget = event.target
@@ -368,82 +352,6 @@ function developerMode() {
 document.addEventListener('mousemove', function (e) {
     document.getElementById("tooltip").style.top = e.clientY - 15 + "px";
 }, false);
-function suggestTasks() {
-    etg = event.target;
-    etg.disabled = true;
-    etg.firstChild.style.display = "inline-block";
-    var xhr = new XMLHttpRequest();
-    var url = "https://apiprox.krzs.workers.dev/blspecific/tasksuggest";
-    xhr.open("POST", url, true);
-    playSound("/assets/sfx/aito.mp3");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            try {
-            xhrresponse = JSON.parse(xhr.responseText).candidates[0].content.parts[0].text;
-            JSON.parse(xhrresponse).forEach(function (e) {
-                playSound("/assets/sfx/aifrom.mp3");
-                createTask(e, 25, true);
-            })
-            } catch {
-                notify("There was an error upon trying to generate the AI task suggestions.")
-            }
-            etg.disabled = false;
-            etg.firstChild.style.display = "none";
-        }
-    }
-    var data = Names
-    xhr.send(data);
-}
-AiChat = "AI: Hi, I'm Blueberry AI! How can I help you?";
-function sendAiMessage() {
-    playSound("/assets/sfx/aito.mp3");
-    var newelem = document.createElement("span");
-    var belem = document.createElement("b");
-    belem.textContent = localStorage.getItem("cookieusername") + ": ";
-    newelem.appendChild(belem);
-    var pelem = document.createElement("span");
-    var pelemtxt = document.getElementById("aiinput").value;
-    pelem.textContent = pelemtxt;
-    newelem.appendChild(pelem);
-    document.getElementById("chatbox").appendChild(newelem);
-    AiChat = AiChat + "\n\nUser: " + pelemtxt + "\n\nAI: ";
-    var xhr = new XMLHttpRequest();
-    var url = "https://apiprox.krzs.workers.dev/blspecific/chatai";
-    xhr.open("POST", url, true);
-    document.getElementById("aiinput").disabled = true;
-    document.getElementById("aiinput").value = "AI is thinking...";
-    document.getElementById("aisubmitbtn").disabled = true;
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            try {
-                playSound("/assets/sfx/aifrom.mp3");
-                xhrresponse = JSON.parse(xhr.responseText).candidates[0].content.parts[0].text;
-                var newelem = document.createElement("span");
-                var belem = document.createElement("b");
-                belem.textContent = "AI: ";
-                newelem.appendChild(belem);
-                var pelem = document.createElement("span");
-                pelem.textContent = xhrresponse;
-                newelem.appendChild(pelem);
-                document.getElementById("chatbox").appendChild(newelem);
-                document.getElementById("aiinput").disabled = false;
-                document.getElementById("aiinput").value = "";
-                document.getElementById("aisubmitbtn").disabled = false;
-                AiChat = AiChat + xhrresponse;
-            } catch {
-                notify("There was an error upon trying to generate the AI's reponse.'")
-            }
-        }
-    }
-    var data = JSON.stringify({
-        "tasks": Names,
-        "timeline": AiChat
-    });
-    xhr.send(data);
-}
-
 // Colors
 if (KRZSStore.getItem("themeColor1") != "{}") {
     document.getElementById("themeColor1").value = KRZSStore.getItem("themeColor1");
@@ -642,8 +550,6 @@ document.getElementById("editform").onsubmit = function () {
         Idelem.firstChild.firstChild.nextSibling.classList.add("highpriority");
     } else if (priority == "50") {
         Idelem.firstChild.firstChild.nextSibling.classList.add("lowpriority");
-    } else if (priority == "25") {
-        Idelem.firstChild.firstChild.nextSibling.classList.add("aipriority");
     } else {
         Idelem.firstChild.firstChild.nextSibling.classList.add("debugpriority");
     };
@@ -670,3 +576,24 @@ document.getElementById("e-taskcancel").onclick = function () {
         document.querySelector("#e-taskcancel").disabled = false;
     }, 1100);
 };
+
+// April Fools
+function furrySpeak(text) {
+    const transformations = {
+      "r": "w",
+      "l": "w",
+      "th": "d",
+      "s": "sh",
+      "you": "yuw",
+      "ve": "v"
+    };
+    let result = text.toLowerCase();
+      for (const original in transformations) {
+      const replacement = transformations[original];
+      result = result.replace(new RegExp(original, 'g'), replacement); 
+    }
+    if (Math.random() < 0.5) {
+      result += " uwu";
+    }
+    return result;
+  }

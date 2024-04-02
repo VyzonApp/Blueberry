@@ -166,9 +166,6 @@ h6 {font-size: 10px}
 .debugpriority:after {
     content: " Debug ";
 }
-.aipriority:after {
-    content: " AI ";
-}
 .checkbox {
     width: 18px;
     aspect-ratio: 1 / 1;
@@ -663,11 +660,6 @@ h6 {font-size: 10px}
     background: rgba(255,255,255,0.05);
     color: white;
 }
-.minibutton.aibtn:disabled {
-    background: rgba(0,200,0);
-    outline: 2px solid rgba(0,100,0);
-    color: white;
-}
 .minibutton:hover {
     background: rgba(255,255,255,0.1);
 }
@@ -721,116 +713,6 @@ h6 {font-size: 10px}
         top: -100%;
     }
 }
-.ai {
-    flex-direction: column;
-}
-.loader {
-    font-size: inherit;
-    color: white;
-    font-family: "Material Symbols Rounded";
-    animation: linear infinite spin 1s;
-    display: none;
-}
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-.chatui {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-.glasschatbox {
-    width: calc(100% - 40px);
-    height: calc(100% - 47px);
-    margin-bottom: 7px;
-    margin-top: 10px;
-    background: rgba(255,255,255,0.1);
-    padding: 20px;
-    border-radius: 20px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    font-size: 15px;
-    font-family: 'Outfit';
-    box-shadow: 7px 7px 10px rgba(0,0,0,0.25);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.5);
-    white-space: pre-line;
-    text-wrap: pretty;
-    overflow: auto;
-}
-.glassinput {
-    width: 100%;
-    padding-left: 15px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 20px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    font-size: 15px;
-    font-family: 'Outfit';
-    border: none;
-    box-shadow: 7px 7px 10px rgba(0,0,0,0.25);
-    color: white;
-    transition: background 0.3s;
-    cursor: pointer;
-}
-.glassinput:focus:not(:disabled) {
-    outline: 0px solid transparent;
-    background: rgba(255,255,255,0.2);
-    cursor: text;
-}
-.glassinput::placeholder {
-    color: rgba(255,255,255,0.5);
-    opacity: 1;
-}
-.glassinput:disabled {
-    background: rgba(0,0,0,0.25);
-    cursor: not-allowed
-}
-.inputfield {
-    display: flex;
-    width: 100%;
-    height: 55px;
-}
-.submitbtn {
-    font-family: "Material Symbols Rounded";
-    border: none;
-    border-radius: 10px;
-    border-bottom-right-radius: 20px;
-    display: block;
-    font-size: 25px;
-    color: white;
-    background: rgba(0,150,0);
-    margin-left: 7px;
-    aspect-ratio: 1 / 1;
-    cursor: pointer;
-    box-shadow: 7px 7px 10px rgba(0,0,0,0.25);
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.5);
-    transition: all 0.2s;
-}
-.submitbtn:disabled {
-    background: rgba(100,100,100);
-    text-shadow: none;
-    cursor: not-allowed
-}
-.submitbtn:hover:not(:disabled) {
-    background: rgba(0,175,0);
-    text-shadow: none;
-}
-.submitbtn:active:not(:disabled) {
-    background: rgba(0,100,0);
-    text-shadow: 3px 3px 5px rgba(0,0,0,0.75);
-}
 xpvalue:before {
     content: "XP Value: "
 }
@@ -871,4 +753,59 @@ xpvalue,randnum {
 }
 #listslist:focus {
     outline: 0px solid transparent;
+}
+
+/* April Fools */
+.main {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+}
+.task p span {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+}
+.xplevel {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+}
+.addnewtask {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+}
+.copyright {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive !important;
+}
+body, html {
+    background: rgb(255, 127, 225) !important;
+}
+.tasks {
+    background: rgb(255, 93, 217) !important;
+}
+.task {
+    border-bottom: 1px solid rgb(255, 93, 217, 0.2);
+}
+.task p span {
+    color: #ffffff !important;
+}
+.checkbox {
+    border: 2px solid rgba(0,0,0,0.2) !important;
+}
+.main {
+    color: #ffffff !important;
+}
+.xpbar {
+    outline: 3px solid rgb(255, 93, 217) !important;
+}
+.xpwidth {
+    background: rgb(255, 93, 217) !important;
+}
+.xplevel {
+    color: rgb(255, 93, 217) !important;
+}
+.addnewtask {
+    background: rgb(255, 93, 217) !important;
+    color: #ffffff !important;
+}
+.copyright {
+    background: rgb(255, 93, 217) !important;
+    color: #ffffff !important;
+}
+.furdance {
+    height: 1em;
 }

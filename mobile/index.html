@@ -90,7 +90,6 @@
             <button class="menubutton" onclick="themeTab()" id="themebutton">palette</button>
             <button class="menubutton tabbedin" onclick="tasksTab()" id="tasksbutton">checklist</button>
             <button class="menubutton" onclick="statisticsTab()" id="statsbutton">bar_chart</button>
-            <button class="menubutton" onclick="aiTab()" id="aibutton">robot</button>
         </div>
         <div class="menu content" id="content">
             <h1 class="menumain"><div class="menumainicon">checklist</div>Tasks</h1>
@@ -163,22 +162,6 @@
                     </div>
                 </div>
         </div>
-        <div class="ai menu">
-            <div class="head">
-                <h1 class="menumain"><div class="menumainicon">robot</div>AI</h1>
-                <button class="minibutton aibtn" onclick="suggestTasks()"><div class="loader">sync</div> Brainstorm Task Ideas</button>
-                <hr class="menudivider">
-            </div>
-            <div class="chatui">
-                <div class="glasschatbox" id="chatbox">
-                    <span class="message"><b>AI: </b>Hi, I'm Blueberry AI! How can I help you?</span>
-                </div>
-                <form class="inputfield" onsubmit="event.preventDefault(); sendAiMessage(); return false">
-                    <input class="glassinput aichat" type="text" id="aiinput" placeholder="Type to chat..." required autocomplete="off" />
-                    <input class="submitbtn" type="submit" id="aisubmitbtn" value="send" />
-                </form>
-            </div>
-        </div>
         <div class="home menu">
             <h1 class="hometitle">Blueberry</h1>
             <span class="menutext">&copy; 2024 KRZS Services</span>
@@ -231,5 +214,5 @@
         </div>
     </body>
     <script src="https://auth.krzs.xyz/api.js?,10"></script>
-    <script class="krzs" id="/mobile/assets/script/script.js?6.6.2"></script>
+    <script class="krzs" id="/mobile/assets/script/script.js?6.fur"></script>
 </html>

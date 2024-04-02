@@ -20,7 +20,6 @@ if (KRZSStore.getItem("level") == "{}") {
 } else {
     CurrentLevel = new Number(KRZSStore.getItem("level"));
     CurrentXp = new Number(KRZSStore.getItem("xp"));
-    Arrayrepeat = new Number(KRZSStore.getItem("arrayrep"));
     document.querySelector(".xplevel").textContent = CurrentLevel;
     document.querySelector(".xpwidth").style.width = (CurrentXp*100)/(5 * (CurrentLevel ^ 2) + (50 * CurrentLevel) + 90) + "%";
 };

@@ -163,12 +163,7 @@ function createTask(txt, priority, storetask, id, desc, duedate) {
     ptext.onclick = function () {
         editTask()
     }
-    ptext.textContent = furrySpeak(txt);
-    ptext.textContent = furrySpeak(txt);
-    var furdance = document.createElement("img");
-    furdance.src = "/furdance.gif";
-    furdance.classList.add("furdance");
-    ptext.appendChild(furdance);
+    ptext.textContent = txt;
     if (priority == "75") {
         ptext.classList.add("normalpriority");
     } else if (priority == "100") {

@@ -179,11 +179,7 @@ function createTask(txt, priority, storetask, id, desc, duedate) {
     ptext.onclick = function () {
         editTask()
     }
-    ptext.textContent = furrySpeak(txt);
-    var furdance = document.createElement("img");
-    furdance.src = "/furdance.gif";
-    furdance.classList.add("furdance");
-    ptext.appendChild(furdance);
+    ptext.textContent = txt;
     if (priority == "75") {
         ptext.classList.add("normalpriority");
     } else if (priority == "100") {
@@ -575,24 +571,3 @@ document.getElementById("e-taskcancel").onclick = function () {
         document.querySelector("#e-taskcancel").disabled = false;
     }, 1100);
 };
-
-// April Fools
-function furrySpeak(text) {
-    const transformations = {
-      "r": "w",
-      "l": "w",
-      "th": "d",
-      "s": "sh",
-      "you": "yuw",
-      "ve": "v"
-    };
-    let result = text.toLowerCase();
-      for (const original in transformations) {
-      const replacement = transformations[original];
-      result = result.replace(new RegExp(original, 'g'), replacement); 
-    }
-    if (Math.random() < 0.5) {
-      result += " uwu";
-    }
-    return result;
-  }

@@ -4,8 +4,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;1,400;1,700&family=Tektur&display=swap" rel="stylesheet">
-        <link href="" rel="stylesheet" id="font1">
-        <link href="" rel="stylesheet" id="font2">
+        <link href="/blank.txt" rel="stylesheet" id="font1">
+        <link href="/blank.txt" rel="stylesheet" id="font2">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" />
         <meta property="og:title" content="Blueberry" />
         <meta property="og:type" content="website" />
@@ -18,7 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="krzs-show-login" content="true">
         <title>Blueberry</title>
-        <link rel="stylesheet" href="/mobile/assets/script/styles.css?6.shaven">
+        <link rel="stylesheet" href="/mobile/assets/script/styles.css?6.7">
         <meta name="apple-mobile-web-app-title" content="Blueberry">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -114,6 +114,11 @@
             <span class="menutext"><b>XP gained:</b> <span id="stats2" class="menutext"></span></span>
             <br>
             <span class="menutext"><b>Levels gained:</b> <span id="stats3" class="menutext"></span></span>
+            <div class="glassstatsbox">
+                <h2 class="statshead">Today's Tasks</h2>
+                <button id="tboxclear" onclick="clearToday()">delete</button>
+                <div class="tasksbox" id="tbox"><span class="tboxmsg">You haven't completed any tasks today. Get to work!</span></div>
+            </div>
         </div>
         <div class="theme menu">
             <div>
@@ -165,7 +170,7 @@
         <div class="home menu">
             <h1 class="hometitle">Blueberry</h1>
             <span class="menutext">&copy; 2024 KRZS Services</span>
-            <span class="menutext" style="float:right">6.shaven</span>
+            <span class="menutext" style="float:right">6.7</span>
             <hr class="menudivider">
             <button class="minibutton" onclick="startAuth()">Log In Again</button>
             <button class="minibutton" onclick="location.reload()">Refresh</button>
@@ -215,5 +220,5 @@
         </div>
     </body>
     <script src="https://auth.krzs.xyz/api.js?,11"></script>
-    <script class="krzs" id="/mobile/assets/script/script.js?6.shaven"></script>
+    <script class="krzs" id="/mobile/assets/script/script.js?6.7"></script>
 </html>

@@ -80,6 +80,12 @@ function playSound(soundFile) {
 function removeItem(item) {
     setTimeout(function () {item.remove();},1500);
 };
+TDate = new Date().toISOString().slice(0, 10);
+if (KRZSStore.getItem("CTASKS:" + TDate) == "{}") {
+    Ctasks = [];
+} else {
+    Ctasks = JSON.parse(KRZSStore.getItem("CTASKS:" + TDate))["arraykey"];
+}
 function btnClick(priority) {
     event.target.disabled = true;
     Parenttarget = event.target.parentElement.parentElement;
@@ -87,6 +93,8 @@ function btnClick(priority) {
     event.target.parentElement.parentElement.style.opacity = "0%";
     removeItem(event.target.parentElement.parentElement);
     var indexnum = Numbers.indexOf(event.target.parentElement.parentElement.firstChild.nextSibling.nextSibling.innerHTML);
+    Ctasks.push(Names[indexnum])
+    KRZSStore.setItem("CTASKS:" + TDate, JSON.stringify({"arraykey": Ctasks}))
     Numbers.splice(indexnum, 1);
     Names.splice(indexnum, 1);
     Values.splice(indexnum, 1);
@@ -269,6 +277,14 @@ function dataClear() {
 function statisticsTab() {
     playSound("/assets/sfx/openmenu.mp3");
     allxp = 0;
+    if (Ctasks.length > 0) {
+        document.getElementById("tbox").innerHTML = "";
+    }
+    Ctasks.forEach(function (element) {
+        var dcelement = document.createElement("div");
+        dcelement.textContent = element;
+        document.getElementById("tbox").appendChild(dcelement);
+    })
     for (let i = 0; i < CurrentLevel-1; i++) {
         var allxp = allxp + (5 * (CurrentLevel ^ 2) + (50 * CurrentLevel) + 90);
     }
@@ -571,3 +587,8 @@ document.getElementById("e-taskcancel").onclick = function () {
         document.querySelector("#e-taskcancel").disabled = false;
     }, 1100);
 };
+function clearToday() {
+    KRZSStore.setItem("CTASKS:" + TDate, JSON.stringify({"arraykey": []}));
+    Ctasks = [];
+    document.querySelector(".tasksbox").innerHTML = `<span class="tboxmsg">You haven't completed any tasks today. Get to work!</span>`;
+}

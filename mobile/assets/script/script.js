@@ -75,6 +75,12 @@ if (KRZSStore.getItem("tasks" + CurrentList) != "{}") {
 function removeItem(item) {
     setTimeout(function () {item.remove();},1500);
 };
+TDate = new Date().toISOString().slice(0, 10);
+if (KRZSStore.getItem("CTASKS:" + TDate) == "{}") {
+    Ctasks = [];
+} else {
+    Ctasks = JSON.parse(KRZSStore.getItem("CTASKS:" + TDate))["arraykey"];
+}
 function btnClick() {
     event.target.disabled = true;
     Parenttarget = event.target.parentElement.parentElement;
@@ -312,6 +318,14 @@ function themeTab() {
 };
 function statisticsTab() {
     allxp = 0;
+    if (Ctasks.length > 0) {
+        document.getElementById("tbox").innerHTML = "";
+    }
+    Ctasks.forEach(function (element) {
+        var dcelement = document.createElement("div");
+        dcelement.textContent = element;
+        document.getElementById("tbox").appendChild(dcelement);
+    })
     for (let i = 0; i < CurrentLevel-1; i++) {
         var allxp = allxp + (5 * (CurrentLevel ^ 2) + (50 * CurrentLevel) + 90);
     }
@@ -490,7 +504,13 @@ document.getElementById("listcancel").onclick = function () {
     }, 1100);
 };
 function updateCloudTasks() {
-    updateCloudTasks();
+    KRZSStore.setItem("tasks" + CurrentList, JSON.stringify({
+        "names": Names,
+        "values": Values,
+        "numbers": Numbers,
+        "descriptions": Descriptions,
+        "duedates": DueDates
+    }));
 }
 function editTask() {
     Idindex = Numbers.indexOf(event.target.parentElement.parentElement.firstChild.nextSibling.nextSibling.innerHTML);
@@ -546,23 +566,8 @@ document.getElementById("e-taskcancel").onclick = function () {
     }, 1100);
 };
 
-// April Fools
-function furrySpeak(text) {
-    const transformations = {
-      "r": "w",
-      "l": "w",
-      "th": "d",
-      "s": "sh",
-      "you": "yuw",
-      "ve": "v"
-    };
-    let result = text.toLowerCase();
-      for (const original in transformations) {
-      const replacement = transformations[original];
-      result = result.replace(new RegExp(original, 'g'), replacement); 
-    }
-    if (Math.random() < 0.5) {
-      result += " uwu";
-    }
-    return result;
-  }
+function clearToday() {
+    KRZSStore.setItem("CTASKS:" + TDate, JSON.stringify({"arraykey": []}));
+    Ctasks = [];
+    document.querySelector(".tasksbox").innerHTML = `<span class="tboxmsg">You haven't completed any tasks today. Get to work!</span>`;
+}

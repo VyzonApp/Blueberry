@@ -58,9 +58,10 @@ h4 {font-size: 15px}
 h5 {font-size: 10px}
 h6 {font-size: 5px}
 .xpbar {
-    margin: 10px;
+    margin-top: 10px;
     margin-left: 5px;
     margin-right: 0;
+    margin-bottom: 12px;
     background: black;
     width: calc(100% - 10px);
     border-radius: 10px;
@@ -91,7 +92,6 @@ h6 {font-size: 5px}
 }
 .tasks {
     border-radius: 10px;
-    margin-top: 20px;
     width: 100%;
     height: calc(100% - 40px);
     overflow: auto;
@@ -117,23 +117,38 @@ h6 {font-size: 5px}
     align-items: center;
     gap: 5px;
 }
+.topgroup {
+    display: flex;
+    gap: 8px;
+}
+.newicon {
+    font-family: 'Material Symbols Rounded';
+}
 .addnewtask {
     border: none;
-    padding: 15px;
     color: white;
     margin: 0;
-    font-size: 18px;
-    background: rgba(0,0,0,0.2);
+    padding: 0 10px;
+    font-size: 16px;
     width: 100%;
     text-align: left;
     cursor: pointer;
     border-radius: 10px;
-    margin-bottom: -5px;
-    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 5px;
+    transition: background 0.2s;
+}
+.addnewtask:hover {
+    background: rgba(0,0,0,0.25);
+    outline: 1px solid rgba(255,255,255,0.25);
 }
 .task p span:after {
     font-weight: bold;
     float: right;
+    margin-right: 5px;
 }
 .lowpriority:after {
     content: " ";
@@ -154,8 +169,7 @@ h6 {font-size: 5px}
     display: inline-block;
     cursor: pointer;
     box-shadow: 0 0 0 rgba(0,0,0);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
-    position: relative;
+    border-radius: 50%;
 }
 .checkbox:disabled {
     cursor: default;
@@ -613,18 +627,20 @@ xpvalue,randnum {
     margin: 10px;
 }
 #listslist {
-    background: rgba(0,0,0,0.25);
     width: 100%;
     color: white;
-    font-family: 'Outfit';
     padding: 10px;
     font-size: 15px;
     border-radius: 10px;
     cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.25);
-}
-#listslist:focus {
+    border: none;
     outline: 0px solid transparent;
+    margin-bottom: 10px;
+    transition: background 0.2s;
+}
+#listslist:hover, #listslist:focus {
+    background: rgba(0,0,0,0.25);
+    outline: 1px solid rgba(255,255,255,0.25);
 }
 .glassstatsbox {
     width: calc(100% - 30px);
@@ -650,7 +666,6 @@ xpvalue,randnum {
 }
 .tasksbox {
     width: 100%;
-    background: #3760db;
     border-radius: 10px;
     margin-top: 10px;
     box-shadow: none;
@@ -672,7 +687,7 @@ xpvalue,randnum {
     color: rgb(255,255,255,0.5);
     display: block;
 }
-#tboxclear {
+.tboxclear {
     position: absolute;
     right: 5px;
     top: 5px;
@@ -690,10 +705,10 @@ xpvalue,randnum {
     border: 1px solid transparent;
     color: inherit;
 }
-#tboxclear:hover {
+.tboxclear:hover {
     background: rgba(255,255,255,0.1);
 }
-#tboxclear:active {
+.tboxclear:active {
     background: transparent;
     border: 1px solid white;
     outline: 1px solid gray;

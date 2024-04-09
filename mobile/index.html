@@ -18,7 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="krzs-show-login" content="true">
         <title>Blueberry</title>
-        <link rel="stylesheet" href="/mobile/assets/script/styles.css?6.7">
+        <link rel="stylesheet" href="/mobile/assets/script/styles.css?7.0">
         <meta name="apple-mobile-web-app-title" content="Blueberry">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -33,7 +33,7 @@
             body, html {
                 background: #032d70;
             }
-            .tasks {
+            .tasks, .tasksbox {
                 background: #3760db;
             }
             .task {
@@ -57,7 +57,7 @@
             .xplevel {
                 color: #00ff00;
             }
-            .addnewtask {
+            .addnewtask, #listslist {
                 background: #3760db;
                 color: #ffffff;
             }
@@ -78,6 +78,9 @@
             .addnewtask {
                 font-family: 'Outfit';
             }
+            #listslist {
+                font-family: 'Outfit';
+            }
         </style>
         <style id="devmode">xpvalue,randnum{display:none}</style>
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -87,8 +90,8 @@
     <body>
         <div class="buttonmenu">
             <button class="menubutton" onclick="homeTab()" id="homebutton">home</button>
-            <button class="menubutton" onclick="themeTab()" id="themebutton">palette</button>
             <button class="menubutton tabbedin" onclick="tasksTab()" id="tasksbutton">checklist</button>
+            <button class="menubutton" onclick="themeTab()" id="themebutton">palette</button>
             <button class="menubutton" onclick="statisticsTab()" id="statsbutton">bar_chart</button>
         </div>
         <div class="menu content" id="content">
@@ -97,13 +100,15 @@
                 <div class="xplevel">0</div>
                 <div class="xpwidth"></div>
             </div>
-            <select id="listslist" onchange="changeList(new Number(event.target.value))">
-                <option value="-1">New List</option>
-                <optgroup label="Lists" id="listsgroup">
-                    <option value="0" selected>Main List</option>
-                </optgroup>
-            </select>
-            <button class="addnewtask">Add new task...</button>
+            <div class="topgroup">
+                <select id="listslist" onchange="changeList(new Number(event.target.value))">
+                    <option value="-1">New List</option>
+                    <optgroup label="Lists" id="listsgroup">
+                        <option value="0" selected>Main List</option>
+                    </optgroup>
+                </select>
+                <button class="addnewtask"><span class="newicon">add</span> New</button>
+            </div>
             <div class="tasks"></div>
         </div>
         <div class="statistics menu">
@@ -116,7 +121,7 @@
             <span class="menutext"><b>Levels gained:</b> <span id="stats3" class="menutext"></span></span>
             <div class="glassstatsbox">
                 <h2 class="statshead">Today's Tasks</h2>
-                <button id="tboxclear" onclick="clearToday()">delete</button>
+                <button class="tboxclear" id="tboxclear" onclick="clearToday()">delete</button>
                 <div class="tasksbox" id="tbox"><span class="tboxmsg">You haven't completed any tasks today. Get to work!</span></div>
             </div>
         </div>
@@ -129,48 +134,41 @@
             <div class="glassthemebox">
                 <span class="themetext">Background:</span></span>
                 <div class="colorselect">
-                    <input type="color" class="themecolorinput" value="#032d70" id="themeColor1" />
-                    <button class="themesend" onclick="themeColorChange(document.getElementById('themeColor1').value, 1)">Change</button>
+                    <input type="color" class="themecolorinput" value="#032d70" id="themeColor1" onblur="themeColorChange(document.getElementById('themeColor1').value, 1)" />
                 </div>
                 <span class="themetext">Task List:</span></span>
                 <div class="colorselect">
-                    <input type="color" class="themecolorinput" value="#3760db" id="themeColor2" />
-                    <button class="themesend" onclick="themeColorChange(document.getElementById('themeColor2').value, 2)">Change</button>
+                    <input type="color" class="themecolorinput" value="#3760db" id="themeColor2" onblur="themeColorChange(document.getElementById('themeColor2').value, 2)" />
                 </div>
                 <span class="themetext">Task Text:</span></span>
                 <div class="colorselect">
-                    <input type="color" class="themecolorinput" value="#ffffff" id="themeColor3" />
-                    <button class="themesend" onclick="themeColorChange(document.getElementById('themeColor3').value, 3)">Change</button>
+                    <input type="color" class="themecolorinput" value="#ffffff" id="themeColor3" onblur="themeColorChange(document.getElementById('themeColor3').value, 3)" />
                 </div>
                 <span class="themetext">Header:</span></span>
                 <div class="colorselect">
-                    <input type="color" class="themecolorinput" value="#ffffff" id="themeColor4" />
-                    <button class="themesend" onclick="themeColorChange(document.getElementById('themeColor4').value, 4)">Change</button>
+                    <input type="color" class="themecolorinput" value="#ffffff" id="themeColor4" onblur="themeColorChange(document.getElementById('themeColor4').value, 4)" />
                 </div>
                 <span class="themetext">XP Bar:</span></span>
                 <div class="colorselect">
-                    <input type="color" class="themecolorinput" value="#00ff00" id="themeColor5" />
-                    <button class="themesend" onclick="themeColorChange(document.getElementById('themeColor5').value, 5)">Change</button>
+                    <input type="color" class="themecolorinput" value="#00ff00" id="themeColor5" onblur="themeColorChange(document.getElementById('themeColor5').value, 5)" />
                 </div>
             </div>
             <h2 class="themeheader">Fonts (<a href="https://fonts.google.com">Google Fonts</a>)</h1>
                 <div class="glassthemebox">
                     <span class="themetext">Header:</span></span>
                     <div class="colorselect">
-                        <input type="text" class="themetextinput" value="Tektur" id="themeFont1" />
-                        <button class="themesend" onclick="themeFontChange(document.getElementById('themeFont1').value, 1)">Change</button>
+                        <input type="text" class="themetextinput" value="Tektur" id="themeFont1" onblur="themeFontChange(document.getElementById('themeFont1').value, 1)" />
                     </div>
                     <span class="themetext">Task Text:</span></span>
                     <div class="colorselect">
-                        <input type="text" class="themetextinput" value="Outfit" id="themeFont2" />
-                        <button class="themesend" onclick="themeFontChange(document.getElementById('themeFont2').value, 2)">Change</button>
+                        <input type="text" class="themetextinput" value="Outfit" id="themeFont2" onblur="themeFontChange(document.getElementById('themeFont2').value, 2)" />
                     </div>
                 </div>
         </div>
         <div class="home menu">
             <h1 class="hometitle">Blueberry</h1>
             <span class="menutext">&copy; 2024 KRZS Services</span>
-            <span class="menutext" style="float:right">6.7</span>
+            <span class="menutext" style="float:right">7.0</span>
             <hr class="menudivider">
             <button class="minibutton" onclick="startAuth()">Log In Again</button>
             <button class="minibutton" onclick="location.reload()">Refresh</button>
@@ -220,5 +218,5 @@
         </div>
     </body>
     <script src="https://auth.krzs.xyz/api.js?,11"></script>
-    <script class="krzs" id="/mobile/assets/script/script.js?6.7"></script>
+    <script class="krzs" id="/mobile/assets/script/script.js?7.0"></script>
 </html>

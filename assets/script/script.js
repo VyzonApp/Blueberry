@@ -21,7 +21,7 @@ if (KRZSStore.getItem("level") == "{}") {
     CurrentLevel = new Number(KRZSStore.getItem("level"));
     CurrentXp = new Number(KRZSStore.getItem("xp"));
     document.querySelector(".xplevel").textContent = CurrentLevel;
-    document.querySelector(".xpwidth").style.width = (CurrentXp*100)/(5 * (CurrentLevel ^ 2) + (50 * CurrentLevel) + 90) + "%";
+    document.querySelector(".xpwidth").style.width = CurrentXp/5 + "%";
 };
 if (KRZSStore.getItem("taskscompleted") == "{}") {
     TasksCompleted = 0;
@@ -253,17 +253,17 @@ function createTask(txt, priority, storetask, id, desc, duedate) {
 }
 function addXp(amount) {
     CurrentXp = CurrentXp + new Number(amount);
-    XpToNextLevel = 5 * (CurrentLevel ^ 2) + (50 * CurrentLevel) + 90 - CurrentXp;
+    XpToNextLevel = 500 - CurrentXp;
     if (XpToNextLevel <= 0) {
         playSound("/assets/sfx/levelup.mp3");
         CurrentLevel = CurrentLevel + 1;
         CurrentXp = Math.abs(XpToNextLevel);
-        XpToNextLevel = 5 * (CurrentLevel ^ 2) + (50 * CurrentLevel) + 90 - CurrentXp;
+        XpToNextLevel = 500 - CurrentXp;
         document.querySelector(".xplevel").textContent = CurrentLevel;
     } else {
         playSound("/assets/sfx/complete.mp3");
     }
-    document.querySelector(".xpwidth").style.width = (CurrentXp*100)/(5 * (CurrentLevel ^ 2) + (50 * CurrentLevel) + 90) + "%";
+    document.querySelector(".xpwidth").style.width = CurrentXp/5 + "%";
     KRZSStore.setItem("level", CurrentLevel);
     KRZSStore.setItem("xp", CurrentXp);
 }
@@ -285,13 +285,7 @@ function statisticsTab() {
         dcelement.textContent = element;
         document.getElementById("tbox").appendChild(dcelement);
     })
-    for (let i = 0; i < CurrentLevel-1; i++) {
-        var allxp = allxp + (5 * (CurrentLevel ^ 2) + (50 * CurrentLevel) + 90);
-    }
-    allxp = allxp + CurrentXp;
-    if (CurrentLevel != 0) {
-        allxp = allxp + 100;
-    }
+    var allxp = (CurrentLevel * 500) + CurrentXp;
     document.querySelector("#stats1").textContent = TasksCompleted;
     document.querySelector("#stats2").textContent = allxp;
     document.querySelector("#stats3").textContent = CurrentLevel;
@@ -360,9 +354,6 @@ function developerMode() {
     }
 }
 // Back to the main code!
-document.addEventListener('mousemove', function (e) {
-    document.getElementById("tooltip").style.top = e.clientY - 15 + "px";
-}, false);
 // Colors
 if (KRZSStore.getItem("themeColor1") != "{}") {
     document.getElementById("themeColor1").value = KRZSStore.getItem("themeColor1");
@@ -390,46 +381,42 @@ function hexToRGB(hex, alpha) {
     }
 }
 function themeColorChange(log, num) {
-document.getElementById("stylecolors").textContent = `
-body, html {
-    background: ${document.getElementById("themeColor1").value};
-}
-.tasks {
-    background: ${document.getElementById("themeColor2").value};
-}
-.task p span {
-    color: ${document.getElementById("themeColor3").value};
-}
-.task {
-    border-bottom: 1px solid ${hexToRGB(document.getElementById("themeColor3").value,0.2)};
-}
-.checkbox {
-    border: 2px solid ${document.getElementById("themeColor3").value};
-}
-.main {
-    color: ${document.getElementById("themeColor4").value};
-}
-.xpbar {
-    outline: 3px solid ${document.getElementById("themeColor5").value};
-}
-.xpwidth {
-    background: ${document.getElementById("themeColor5").value};
-}
-.xplevel {
-    color: ${document.getElementById("themeColor5").value};
-}
-.addnewtask {
-    background: ${document.getElementById("themeColor2").value};
-    color: ${document.getElementById("themeColor3").value};
-}
-.copyright {
-    background: ${document.getElementById("themeColor2").value};
-    color: ${document.getElementById("themeColor3").value};
-}
-`
-if (log != undefined) {
-    KRZSStore.setItem("themeColor" + num, log);
-}
+    document.getElementById("stylecolors").textContent = `
+    body, html {
+        background: ${document.getElementById("themeColor1").value};
+    }
+    .tasks, .tasksbox {
+        background: ${document.getElementById("themeColor2").value};
+    }
+    .task p span {
+        color: ${document.getElementById("themeColor3").value};
+    }
+    .task {
+        border-bottom: 1px solid ${hexToRGB(document.getElementById("themeColor3").value,0.2)};
+    }
+    .checkbox {
+        border: 2px solid ${document.getElementById("themeColor3").value};
+    }
+    .main {
+        color: ${document.getElementById("themeColor4").value};
+    }
+    .xpbar {
+        outline: 3px solid ${document.getElementById("themeColor5").value};
+    }
+    .xpwidth {
+        background: ${document.getElementById("themeColor5").value};
+    }
+    .xplevel {
+        color: ${document.getElementById("themeColor5").value};
+    }
+    .addnewtask, .copyright, #listslist {
+        background: ${document.getElementById("themeColor2").value};
+        color: ${document.getElementById("themeColor3").value};
+    }
+    `
+    if (log != undefined) {
+        KRZSStore.setItem("themeColor" + num, log);
+    }
 }
 themeColorChange()
 
@@ -442,28 +429,31 @@ if (KRZSStore.getItem("themeFont2") != "{}") {
 }
 
 function themeFontChange(log, num) {
-document.getElementById("font1").href = `https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;1,400;1,700&family=${document.getElementById("themeFont1").value}&display=swap`
-document.getElementById("font2").href = `https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;1,400;1,700&family=${document.getElementById("themeFont2").value}&display=swap`
-document.getElementById("stylefonts").textContent = `
-.main {
-    font-family: '${document.getElementById("themeFont1").value}';
-}
-.task p span {
-    font-family: '${document.getElementById("themeFont2").value}';
-}
-.xplevel {
-    font-family: '${document.getElementById("themeFont1").value}';
-}
-.addnewtask {
-    font-family: '${document.getElementById("themeFont2").value}';
-}
-.copyright {
-    font-family: '${document.getElementById("themeFont2").value}';
-}
-`
-if (log != undefined) {
-    KRZSStore.setItem("themeFont" + num, log);
-}
+    document.getElementById("font1").href = `https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;1,400;1,700&family=${document.getElementById("themeFont1").value}&display=swap`
+    document.getElementById("font2").href = `https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,400;0,700;1,400;1,700&family=${document.getElementById("themeFont2").value}&display=swap`
+    document.getElementById("stylefonts").textContent = `
+    .main {
+        font-family: '${document.getElementById("themeFont1").value}';
+    }
+    .task p span {
+        font-family: '${document.getElementById("themeFont2").value}';
+    }
+    .xplevel {
+        font-family: '${document.getElementById("themeFont1").value}';
+    }
+    .addnewtask {
+        font-family: '${document.getElementById("themeFont2").value}';
+    }
+    .copyright {
+        font-family: '${document.getElementById("themeFont2").value}';
+    }
+    #listslist {
+        font-family: '${document.getElementById("themeFont2").value}';
+    }
+    `
+    if (log != undefined) {
+        KRZSStore.setItem("themeFont" + num, log);
+    }
 }
 themeFontChange();
 function changeList(lnum) {
